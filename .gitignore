@@ -31,3 +31,5 @@ config/initializers/secret_token.rb
 .classpath
 .project
 .settings/
+.metadata/
+RemoteSystemsTempFiles/
