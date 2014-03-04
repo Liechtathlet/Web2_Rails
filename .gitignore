@@ -17,3 +17,17 @@ rerun.txt
 pickle-email-*.html
 .project
 config/initializers/secret_token.rb
+
+*.class
+
+# Package Files #
+*.war
+*.ear
+
+# Java class files
+*.class
+
+# Eclipse project files
+.classpath
+.project
+.settings/
