@@ -17,4 +17,8 @@ class Product < ActiveRecord::Base
       errors.add(:price, "muss auf 5 Rappen gerundet werden.")
     end
   end
+  
+  def self.latest
+    Product.order(:updated_at).last
+  end
 end 
