@@ -1,0 +1,28 @@
+<% if notice %>
+<p id="notice">
+	<%= notice %>
+</p>
+<% end %>
+<h2>Your Pragmatic Cart</h2>
+
+<% @cart.line_items.each do |item| %>
+<div class="product">
+	<div class="product_title">
+		<%= truncate(item.product.title, length: 45) %>
+	</div>
+	<div class="product_price">
+		<span class="price"><%= format_chf(item.product.price) %></span>
+	</div>
+</div>
+<% end %>
+
+<% if @cart.line_items.size > 1 %>
+	<div class="product total">
+		<div class="product_title">
+			Total
+		</div>
+		<div class="product_price">
+			<span class="price,"><%= format_chf(@sum) %></span>
+		</div>
+	</div>
+<% end %>

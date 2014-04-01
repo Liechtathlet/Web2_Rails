@@ -1,0 +1,30 @@
+// Place all the styles related to the Carts controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+.carts {
+  
+   .product {
+      position:relative;
+      top:0px;
+      left:0px;
+      width:100%;
+   }
+   
+   .product_title {
+      width:250px;
+      float:left;
+    }
+    
+   .product_price {
+    }
+    
+     .price {
+       color: #44a;
+       margin-right: 3em;
+     }
+     
+    .total {
+       font-weight: bold;
+    }
+}
