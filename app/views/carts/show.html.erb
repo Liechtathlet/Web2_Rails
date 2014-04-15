@@ -5,24 +5,19 @@
 <% end %>
 <h2>Your Pragmatic Cart</h2>
 
+<h2>Warenkorb</h2>
+ <table>
 <% @cart.line_items.each do |item| %>
-<div class="product">
-	<div class="product_title">
-		<%= truncate(item.product.title, length: 45) %>
-	</div>
-	<div class="product_price">
-		<span class="price"><%= format_chf(item.product.price) %></span>
-	</div>
-</div>
+ <tr>
+ <td><%= item.quantity %>&times;</td>
+ <td><%= truncate(item.product.title, length: 45) %></td>
+ <td class="item_price"><%= format_chf(item.total_price) %></td>
+ </tr>
 <% end %>
+ <tr class="total_line">
+ <td colspan="2">Total</td>
+ <td class="total_cell"><%= number_to_currency(@cart.total_price) %></td>
+ </tr>
+ </table>
 
-<% if @cart.line_items.size > 1 %>
-	<div class="product total">
-		<div class="product_title">
-			Total
-		</div>
-		<div class="product_price">
-			<span class="price,"><%= format_chf(@sum) %></span>
-		</div>
-	</div>
-<% end %>
+<%= button_to 'Empty cart', @cart, method: :delete, data: { confirm: 'Are you sure?' } %>
