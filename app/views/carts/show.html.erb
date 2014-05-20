@@ -1,23 +1,5 @@
 <% if notice %>
-<p id="notice">
-	<%= notice %>
-</p>
+<p id="notice"><%= notice %></p>
 <% end %>
-<h2>Your Pragmatic Cart</h2>
 
-<h2>Warenkorb</h2>
- <table>
-<% @cart.line_items.each do |item| %>
- <tr>
- <td><%= item.quantity %>&times;</td>
- <td><%= truncate(item.product.title, length: 45) %></td>
- <td class="item_price"><%= format_chf(item.total_price) %></td>
- </tr>
-<% end %>
- <tr class="total_line">
- <td colspan="2">Total</td>
- <td class="total_cell"><%= number_to_currency(@cart.total_price) %></td>
- </tr>
- </table>
-
-<%= button_to 'Empty cart', @cart, method: :delete, data: { confirm: 'Are you sure?' } %>
+<%= render @cart %>

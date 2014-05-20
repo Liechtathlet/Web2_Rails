@@ -1,4 +1,6 @@
 Depot::Application.routes.draw do
+  resources :tests
+
   resources :line_items
 
   resources :carts
