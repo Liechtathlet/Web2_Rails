@@ -1,12 +1,20 @@
 <h2>Warenkorb</h2>
- <table>
+<div class="list-group">
 	<%= render(@cart.line_items) %>
-	
-	<tr class="total_line">
-	<td colspan="2">Total</td>
-	<td class="total_cell"><%= format_chf(@cart.total_price) %></td>
-	</tr>
-</table>
 
-<%= button_to "Checkout", new_order_path, method: :get %>
-<%= button_to 'Empty cart', @cart, method: :delete, data: { confirm: 'Are you sure?' } %>
+	<span class="list-group-item">
+		<div class="row">
+			<div class="col-lg-7">
+				<b>Total</b>
+			</div>
+			<div class="col-lg-5 text-right">
+				<b><%= format_chf(@cart.total_price) %></b>
+			</div>
+		</div> </span>
+</div>
+
+
+<div class="btn-group" style="width:100%">
+	<%= button_to "Zur Kasse", new_order_path, method: :get, class: "btn btn-default btn-sm cart_button", form_class: "cart_button" %>
+	<%= button_to 'Warenkorb leeren', @cart, method: :delete, data: { confirm: 'Sind Sie sicher?' }, class: "btn btn-default btn-sm cart_button", form_class: "cart_button" %>
+</div>

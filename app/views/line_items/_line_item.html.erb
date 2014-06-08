@@ -1,9 +1,31 @@
 <% if line_item == @current_item %>
-	<tr id="current_item">
-	<% else %>
-	<tr>
+		<span class="list-group-item" id="current_item">
+<% else %>
+		<span class="list-group-item">
 <% end %>
-	<td><%= line_item.quantity %>&times;</td>
-	<td><%= truncate(line_item.product.title,length: 45) %></td>
-	<td class="item_price"><%= format_chf(line_item.total_price) %></td>
-</tr>
+	<div class="row" style="font-size:0.85em;">
+		<div class="col-lg-12">
+			<%= truncate(line_item.product.title,length: 35) %>
+		</div>
+	</div> 
+	<div class="row" style="margin-top:3px;font-size:0.85em;">
+		<div class="col-lg-3">
+			<i><span class="badge"><%= line_item.quantity %></span></i>
+		</div>
+		<div class="col-lg-4">
+			<%= link_to incrementQuantity_line_item_path(:id => line_item), class: "btn btn-default btn-xs very-small-btn", remote: true do %> 
+				<span class="glyphicon glyphicon-plus"></span>	
+			<% end %> 		
+			<%= link_to decrementQuantity_line_item_path(:id => line_item), class: "btn btn-default btn-xs very-small-btn", remote: true do %> 
+				<span class="glyphicon glyphicon-minus"></span>	
+			<% end %> 	
+			<%= link_to remove_line_item_path(:id => line_item), class: "btn btn-default btn-xs very-small-btn", remote: true do %> 
+				<span class="glyphicon glyphicon-remove"></span>	
+			<% end %> 
+		</div>
+		<div class="col-lg-5 text-right">
+			<%= format_chf(line_item.total_price) %>
+		</div>
+	</div> 
+</span>
+

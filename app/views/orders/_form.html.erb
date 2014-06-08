@@ -1,0 +1,39 @@
+<%= form_for(@order,:html => {:class => "form-horizontal"}) do |f| %>
+<% if @order.errors.any? %>
+<div class="alert alert-danger alert-dismissable alert-list">
+	  <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+	  <ul>
+			<% @order.errors.full_messages.each do |msg| %>
+			<li>
+				<%= msg %>
+			</li>
+			<% end %>
+		</ul>
+</div>
+<% end %>
+
+<div class="<%= field_class(@order,"form-group",:name) %>">
+	<%= f.label :name %>
+	<br>
+	<%= f.text_field :name, size: 40 , class: "form-control"%>
+</div>
+<div class="<%= field_class(@order,"form-group ",nil) %>">
+	<%= f.label :address %>
+	<br>
+	<%= f.text_area :address, rows: 3, cols: 40,class: "form-control" %>
+</div>
+<div class="<%= field_class(@order,"form-group",nil) %>">
+	<%= f.label :email %>
+	<br>
+	<%= f.email_field :email, size: 40,class: "form-control" %>
+</div>
+<div class="<%= field_class(@order,"form-group",nil) %>">
+	<%= f.label :pay_type %>
+	<br>
+	<%= f.select(:pay_type, Order::PAYMENT_TYPES, {prompt: 'Zahlungsart'}, {class: "form-control"}) %>
+</div>
+<br/>
+<div class="actions">
+	<%= f.submit 'Bestellen', class: "btn  btn-default" %>
+</div>
+<% end %>

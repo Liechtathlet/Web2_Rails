@@ -1,8 +1,61 @@
 class LineItemsController < ApplicationController
   include CurrentCart
   before_action :set_cart, only: [:create]
-  before_action :set_line_item, only: [:show, :edit, :update, :destroy]
+  before_action :set_line_item, only: [:show, :edit, :update, :destroy, :incrementQuantity, :decrementQuantity, :remove]
 
+  def incrementQuantity
+      if ! @line_item.nil?
+        @line_item.quantity += 1
+        
+        @line_item.save
+        
+        set_cart
+        @current_item = @line_item
+        @sum = 0
+        @cart.line_items.each { |c| @sum+=c.product.price}
+        
+        respond_to do |format|
+           format.js   { render :action => 'create'}
+        end
+      end
+  end
+  
+  def decrementQuantity
+      if ! @line_item.nil? 
+        @line_item.quantity -= 1
+        
+        if @line_item.quantity <= 0
+            @line_item.destroy
+        else
+            @line_item.save    
+        end
+        
+        set_cart
+        @current_item = @line_item
+        @sum = 0
+        @cart.line_items.each { |c| @sum+=c.product.price}
+            
+        respond_to do |format|
+            format.js   { render :action => 'create'}
+         end
+      end
+  end
+  
+  def remove
+      if ! @line_item.nil? 
+        @line_item.destroy
+        
+        set_cart
+        @current_item = @line_item
+        @sum = 0
+        @cart.line_items.each { |c| @sum+=c.product.price}
+            
+        respond_to do |format|
+            format.js   { render :action => 'create'}
+         end
+      end
+  end
+    
   # GET /line_items
   # GET /line_items.json
   def index
@@ -76,4 +129,5 @@ class LineItemsController < ApplicationController
     def line_item_params
       params.require(:line_item).permit(:product_id)
     end
+    
 end
